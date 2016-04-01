@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NginxConfigurator.CLI", "NginxConfigurator.CLI\NginxConfigurator.CLI.csproj", "{F9F9838E-DC6F-493C-9D92-AA5F47F86E12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NginxConfigurator.API", "NginxConfigurator.API\NginxConfigurator.API.csproj", "{C3C22F40-8CA4-49BB-904D-A50A897AFAFC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9F9838E-DC6F-493C-9D92-AA5F47F86E12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9F9838E-DC6F-493C-9D92-AA5F47F86E12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9F9838E-DC6F-493C-9D92-AA5F47F86E12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9F9838E-DC6F-493C-9D92-AA5F47F86E12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3C22F40-8CA4-49BB-904D-A50A897AFAFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3C22F40-8CA4-49BB-904D-A50A897AFAFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3C22F40-8CA4-49BB-904D-A50A897AFAFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3C22F40-8CA4-49BB-904D-A50A897AFAFC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
