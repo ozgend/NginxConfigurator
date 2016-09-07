@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace NginxConfigurator.API.Model
 {
+    [Serializable]
     public class Location
     {
         public Location()

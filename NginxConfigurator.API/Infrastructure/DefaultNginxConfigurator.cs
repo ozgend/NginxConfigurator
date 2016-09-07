@@ -2,27 +2,33 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Resources;
 using NginxConfigurator.API.Internal;
 using NginxConfigurator.API.Model;
-using RazorEngine;
 using RazorEngine.Configuration;
 using RazorEngine.Templating;
 using RazorEngine.Text;
 
 namespace NginxConfigurator.API.Infrastructure
 {
-    public class DefaultNginxConfigurator : IConfigurator
+    public class DefaultNginxConfigurator : INginxConfigurator
     {
-        const string DefaultTemplateName = "nginx.conf.template";
         private string _templateContent;
-        private readonly Configuration _configuration;
+        private INginxConfiguration _configuration;
 
-        public DefaultNginxConfigurator(string templateContent = null)
+        public DefaultNginxConfigurator()
         {
-            _templateContent = templateContent ??
-                              ResourceHelper.ReadEmbeddedResource("Template.nginx.conf.template", Assembly.GetExecutingAssembly());
-            _configuration = new Configuration();
+            Create();
+        }
+
+        public INginxConfiguration GetConfigurationInstance()
+        {
+            return _configuration;
+        }
+
+        public void Create(string templateContent = null)
+        {
+            _templateContent = templateContent ?? ResourceHelper.ReadEmbeddedResource("Template.nginx.conf.template", Assembly.GetExecutingAssembly());
+            _configuration = new NginxConfiguration();
         }
 
         public void SetListeningServer(string name, int port)
@@ -40,22 +46,27 @@ namespace NginxConfigurator.API.Infrastructure
         {
             _configuration.ProxyHeaders[key] = value;
         }
+
         public void SetLogFormat(string format)
         {
             _configuration.LogFormat = format;
         }
 
-        public void MakeConfigurationFile(string outputPath)
+        public string MakeConfigurationFile(string outputPath = null)
         {
-            var config = new TemplateServiceConfiguration();
-            config.EncodedStringFactory = new RawStringFactory(); // Raw string encoding.
-            config.Debug = true;
+            // https://github.com/Antaris/RazorEngine/issues/244
+            using (var service = IsolatedRazorEngineService.Create(AppdomainHelper.SandboxCreator))
+            {
+                var contents = service.RunCompile(_templateContent, "nginx.configuration", typeof(INginxConfiguration), _configuration);
 
-            var service = RazorEngineService.Create(config);
+                if (outputPath != null)
+                {
+                    File.WriteAllText(outputPath, contents);
+                    Console.WriteLine("configuration file created - {0}", outputPath);
+                }
 
-            var contents = service.RunCompile(_templateContent, "nginx.configuration", typeof(Configuration), _configuration);
-            File.WriteAllText(outputPath, contents);
-            Console.WriteLine("configuration file created - {0}", outputPath);
+                return contents;
+            }
         }
 
     }

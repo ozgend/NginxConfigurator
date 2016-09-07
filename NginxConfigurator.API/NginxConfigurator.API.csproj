@@ -36,14 +36,14 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RazorEngine, Version=3.7.7.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
-      <HintPath>..\packages\RazorEngine.3.7.7\lib\net45\RazorEngine.dll</HintPath>
+    <Reference Include="RazorEngine, Version=3.9.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.9.0\lib\net45\RazorEngine.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
@@ -55,11 +55,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\DefaultNginxConfigurator.cs" />
-    <Compile Include="Infrastructure\IConfigurator.cs" />
+    <Compile Include="Infrastructure\INginxConfigurator.cs" />
+    <Compile Include="Internal\AppdomainHelper.cs" />
     <Compile Include="Internal\ResourceHelper.cs" />
-    <Compile Include="Model\Configuration.cs" />
+    <Compile Include="Model\NginxConfiguration.cs" />
     <Compile Include="Model\Events.cs" />
     <Compile Include="Model\Http.cs" />
+    <Compile Include="Infrastructure\INginxConfiguration.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,8 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
     <EmbeddedResource Include="Template\nginx.conf.template" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
